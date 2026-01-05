@@ -43,7 +43,7 @@
   services.desktopManager.gnome.enable = true;
 
   # Enable fractional scaling for GNOME
-  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+  services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.mutter]
     experimental-features=['scale-monitor-framebuffer']
   '';
@@ -69,6 +69,10 @@
 
 
   services.hardware.bolt.enable = true;
+
+  # Enable fingerprint reader
+  services.fprintd.enable = true;
+  security.pam.services.sudo.fprintAuth = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

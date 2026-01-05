@@ -42,6 +42,12 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # Enable fractional scaling for GNOME
+  services.xserver.desktopManager.gnome.extraGSettingsOverrides = ''
+    [org.gnome.mutter]
+    experimental-features=['scale-monitor-framebuffer']
+  '';
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -61,7 +67,7 @@
     pulse.enable = true;
   };
 
-  
+
   services.hardware.bolt.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -92,7 +98,7 @@
   ];
 
   services.openssh.enable = true;
-  system.stateVersion = "25.11"; # Don't touch this value 
+  system.stateVersion = "25.11"; # Don't touch this value
 
 
   # Limit the number of generations to keep

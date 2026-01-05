@@ -10,6 +10,8 @@
     zed-editor
     _1password-gui
     google-chrome
+    claude-code
+    claude-code-acp
   ];
 
 

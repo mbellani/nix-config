@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Zed Editor Configuration
   programs.zed-editor = {
     enable = true;
     extensions = [

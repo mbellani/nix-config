@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # SSH Configuration
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;

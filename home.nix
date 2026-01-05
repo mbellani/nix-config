@@ -7,7 +7,6 @@
     jq
     ripgrep
     unzip
-    zed-editor
     _1password-gui
     google-chrome
     claude-code
@@ -20,7 +19,7 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    
+
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
@@ -30,7 +29,7 @@
           AddKeysToAgent = "yes";
         };
       };
-     
+
       "*" = {
         extraOptions = {
           AddKeysToAgent = "yes";
@@ -48,10 +47,10 @@
   # SSH Agent
   services.ssh-agent.enable = true;
 
-  # Git Configuration 
+  # Git Configuration
   programs.git = {
     enable = true;
-    
+
     settings = {
       user.name = "Manish Bellani";
       user.email = "manish.bellani@gmail.com";
@@ -64,13 +63,35 @@
   programs.starship = {
    enable = true;
   };
- 
-  # Must set the theme to correctly render various application icons 
+
+  # Must set the theme to correctly render various application icons
   gtk = {
     enable = true;
     iconTheme = {
       package = pkgs.adwaita-icon-theme;
       name = "Adwaita";
+    };
+  };
+
+  # Zed Editor Configuration
+  programs.zed-editor = {
+    enable = true;
+    extensions = [
+      "catppuccin"
+      "git-firefly"
+      "html"
+      "nix"
+      "tokyo-night"
+    ];
+    userSettings = {
+      vim_mode = true;
+      ui_font_size = 16;
+      buffer_font_size = 15;
+      theme = {
+        mode = "system";
+        light = "One Light";
+        dark = "Ayu Mirage";
+      };
     };
   };
 

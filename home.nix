@@ -10,9 +10,6 @@
     ./modules/home/linux.nix
   ];
 
-  home.username = "mbellani";
-  home.homeDirectory = "/home/mbellani";
-
   home.packages = with pkgs; [
     jq
     ripgrep

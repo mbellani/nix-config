@@ -35,15 +35,15 @@
 
     # nix-darwin Configurations
     darwinConfigurations = {
-      macbook = darwin.lib.darwinSystem {
+      xbow-laptop = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./hosts/macbook/configuration.nix
+          ./hosts/xbow-laptop/configuration.nix
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.mbellani = import ./home.nix;
+            home-manager.users."manish.bellani" = import ./home.nix;
           }
         ];
       };

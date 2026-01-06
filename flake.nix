@@ -3,20 +3,25 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
-  outputs = inputs@{self, nixpkgs, nixpkgs-darwin, darwin, home-manager, ...}: {
+  outputs = inputs@{self, nixpkgs, nixpkgs-unstable, darwin, home-manager, home-manager-unstable, ...}: {
     # NixOS Configurations
     nixosConfigurations = {
       framework = nixpkgs.lib.nixosSystem {
@@ -39,7 +44,7 @@
         system = "aarch64-darwin";
         modules = [
           ./hosts/xbow-laptop/configuration.nix
-          home-manager.darwinModules.home-manager
+          home-manager-unstable.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

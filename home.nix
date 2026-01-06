@@ -10,6 +10,11 @@
     ./modules/home/linux.nix
   ];
 
+  home.homeDirectory =
+    if pkgs.stdenv.isDarwin
+    then "/Users/${config.home.username}"
+    else "/home/${config.home.username}";
+
   home.packages = with pkgs; [
     jq
     ripgrep

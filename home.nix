@@ -17,7 +17,6 @@
     google-chrome
     claude-code
     claude-code-acp
-    notion-app
     ghostty
   ];
 

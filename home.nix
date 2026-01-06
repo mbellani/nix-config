@@ -21,6 +21,12 @@
     ghostty
   ];
 
+  # Enable bash with Starship integration
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+  };
+
   # Must set the theme to correctly render various application icons
   gtk = {
     enable = true;

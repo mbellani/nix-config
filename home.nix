@@ -7,10 +7,12 @@
     ./modules/home/zed.nix
     ./modules/home/starship.nix
     ./modules/home/zsh.nix
+    ./modules/home/linux.nix
   ];
 
   home.username = "mbellani";
   home.homeDirectory = "/home/mbellani";
+
   home.packages = with pkgs; [
     jq
     ripgrep
@@ -22,27 +24,10 @@
     ghostty
   ];
 
-  # Enable bash with Starship integration
+  # Enable bash for script compatibility
   programs.bash = {
     enable = true;
     enableCompletion = true;
-  };
-
-  # Must set the theme to correctly render various application icons
-  gtk = {
-    enable = true;
-    iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-  };
-
-  # Set Ghostty as default terminal
-  dconf.settings = {
-    "org/gnome/desktop/default-applications/terminal" = {
-      exec = "ghostty";
-      exec-arg = "";
-    };
   };
 
   home.stateVersion = "25.11";

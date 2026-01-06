@@ -5,6 +5,7 @@
     ./modules/home/git.nix
     ./modules/home/ssh.nix
     ./modules/home/zed.nix
+    ./modules/home/starship.nix
   ];
 
   home.username = "mbellani";
@@ -19,10 +20,6 @@
     claude-code-acp
     ghostty
   ];
-
-  programs.starship = {
-   enable = true;
-  };
 
   # Must set the theme to correctly render various application icons
   gtk = {

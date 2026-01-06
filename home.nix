@@ -6,6 +6,7 @@
     ./modules/home/ssh.nix
     ./modules/home/zed.nix
     ./modules/home/starship.nix
+    ./modules/home/zsh.nix
   ];
 
   home.username = "mbellani";

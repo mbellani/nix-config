@@ -82,10 +82,14 @@
     isNormalUser = true;
     description = "Manish Bellani";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
     #  thunderbird
     ];
   };
+
+  # Enable zsh system-wide
+  programs.zsh.enable = true;
 
   programs.firefox.enable = true;
 

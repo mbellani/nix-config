@@ -32,7 +32,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.mbellani = import ./home.nix;
+            home-manager.users.mbellani = import ./home.nix { username = "mbellani"; };
           }
         ];
       };
@@ -48,7 +48,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users."manish.bellani" = import ./home.nix;
+            home-manager.users."manish.bellani" = import ./home.nix { username = "manish.bellani"; };
           }
         ];
       };

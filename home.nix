@@ -1,3 +1,5 @@
+{ username }:
+
 { config, pkgs, ... }:
 
 {
@@ -10,10 +12,11 @@
     ./modules/home/linux.nix
   ];
 
+  home.username = username;
   home.homeDirectory =
     if pkgs.stdenv.isDarwin
-    then "/Users/${config.home.username}"
-    else "/home/${config.home.username}";
+    then "/Users/${username}"
+    else "/home/${username}";
 
   home.packages = with pkgs; [
     jq

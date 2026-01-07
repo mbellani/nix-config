@@ -24,6 +24,7 @@
       theme = {
         mode = "system";
         dark = "Catppuccin Frappé";
+        light = "Catppuccin Latte";
       };
       agent = {
         default_model = {

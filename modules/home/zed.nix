@@ -9,15 +9,19 @@
       "html"
       "nix"
       "tokyo-night"
+      "catppuccin-icons"
     ];
     userSettings = {
       vim_mode = true;
       ui_font_size = 16;
       buffer_font_size = 15;
+      icon_theme = "Catppuccin Frappé";
+      indent_guides = {
+        coloring = "indent_aware";
+      };
       theme = {
         mode = "system";
-        light = "One Light";
-        dark = "Ayu Mirage";
+        dark = "Catppuccin Frappé";
       };
       agent = {
         default_model = {

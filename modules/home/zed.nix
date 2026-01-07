@@ -12,6 +12,7 @@
       "catppuccin-icons"
       "toml"
       "typst"
+      "docker"
     ];
     userSettings = {
       vim_mode = true;

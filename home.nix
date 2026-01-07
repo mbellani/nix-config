@@ -1,6 +1,6 @@
 { username }:
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -22,10 +22,11 @@
     jq
     ripgrep
     unzip
-    _1password-gui
-    google-chrome
     claude-code
     claude-code-acp
+  ] ++ lib.optionals stdenv.isLinux [
+    _1password-gui
+    google-chrome
     ghostty
   ];
 

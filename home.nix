@@ -24,6 +24,7 @@
     unzip
     claude-code
     claude-code-acp
+    slack
   ] ++ lib.optionals stdenv.isLinux [
     _1password-gui
     google-chrome

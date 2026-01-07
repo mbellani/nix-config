@@ -5,6 +5,7 @@
 {
   imports = [
     ./modules/home/git.nix
+    ./modules/home/gh.nix
     ./modules/home/ssh.nix
     ./modules/home/zed.nix
     ./modules/home/starship.nix

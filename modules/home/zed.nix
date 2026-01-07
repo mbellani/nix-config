@@ -19,6 +19,12 @@
         light = "One Light";
         dark = "Ayu Mirage";
       };
+      agent = {
+        default_model = {
+          provider = "anthropic";
+          model = "claude-opus-4-5-20250514";
+        };
+      };
     };
   };
 }

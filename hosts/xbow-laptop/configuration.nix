@@ -7,7 +7,7 @@
 
   # Nix Configuration
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.auto-optimise-store = true;
+  nix.optimise.automatic = true;
   nix.gc = {
     automatic = true;
     interval = { Weekday = 0; Hour = 2; Minute = 0; };
@@ -24,6 +24,12 @@
     wget
     git
   ];
+
+  # User Configuration
+  users.users."manish.bellani" = {
+    home = "/Users/manish.bellani";
+    shell = pkgs.zsh;
+  };
 
   # Programs
   programs.zsh.enable = true;
@@ -50,8 +56,8 @@
     };
   };
 
-  # Auto upgrade nix package and the daemon service
-  services.nix-daemon.enable = true;
+  # Primary user for system defaults
+  system.primaryUser = "manish.bellani";
 
   system.stateVersion = 6;
 }

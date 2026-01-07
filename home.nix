@@ -31,6 +31,7 @@
     ghostty
   ] ++ lib.optionals stdenv.isDarwin [
     ghostty-bin
+    notion-app
   ];
 
   # Enable bash for script compatibility

@@ -40,5 +40,17 @@
     enableCompletion = true;
   };
 
+  # Colima autostart on macOS
+  launchd.agents.colima = lib.mkIf pkgs.stdenv.isDarwin {
+    enable = true;
+    config = {
+      ProgramArguments = [ "${pkgs.colima}/bin/colima" "start" ];
+      RunAtLoad = true;
+      KeepAlive = false;
+      StandardOutPath = "/tmp/colima.out.log";
+      StandardErrorPath = "/tmp/colima.err.log";
+    };
+  };
+
   home.stateVersion = "25.11";
 }

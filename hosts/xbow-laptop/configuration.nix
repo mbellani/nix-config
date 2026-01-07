@@ -23,6 +23,9 @@
     vim
     wget
     git
+    colima
+    docker
+    docker-compose
   ];
 
   # User Configuration

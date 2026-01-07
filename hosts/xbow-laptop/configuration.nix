@@ -37,6 +37,9 @@
   # Programs
   programs.zsh.enable = true;
 
+  # Security - Enable Touch ID for sudo
+  security.pam.services.sudo_local.touchIdAuth = true;
+
   # macOS-specific settings
   system.defaults = {
     dock = {

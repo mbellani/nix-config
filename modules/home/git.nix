@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  home.file.".gitconfig.xbow".text = ''
+    [user]
+      email = manish.bellani@xbow.com
+  '';
+
   programs.git = {
     enable = true;
 
@@ -11,5 +16,20 @@
       # Always use SSH for GitHub
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
     };
+
+    includes = [
+      {
+        condition = "hasconfig:remote.*.url:git@github.com:xbow-engineering/**";
+        path = "~/.gitconfig.xbow";
+      }
+      {
+        condition = "hasconfig:remote.*.url:https://github.com/xbow-engineering/**";
+        path = "~/.gitconfig.xbow";
+      }
+      {
+        condition = "gitdir:~/src/github.com/xbow-engineering/";
+        path = "~/.gitconfig.xbow";
+      }
+    ];
   };
 }

@@ -13,6 +13,7 @@
       "toml"
       "typst"
       "docker"
+      "dockerfile"
     ];
     userSettings = {
       vim_mode = true;

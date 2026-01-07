@@ -29,6 +29,8 @@
     _1password-gui
     google-chrome
     ghostty
+  ] ++ lib.optionals stdenv.isDarwin [
+    ghostty-bin
   ];
 
   # Enable bash for script compatibility

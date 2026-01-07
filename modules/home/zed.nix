@@ -10,6 +10,8 @@
       "nix"
       "tokyo-night"
       "catppuccin-icons"
+      "toml"
+      "typst"
     ];
     userSettings = {
       vim_mode = true;

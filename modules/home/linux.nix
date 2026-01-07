@@ -18,6 +18,14 @@
         exec = "ghostty";
         exec-arg = "";
       };
+
+      "org/gnome/SessionManager" = {
+        auto-save-session = true;
+      };
+
+      "org/gnome/gnome-session" = {
+        auto-save-session = true;
+      };
     };
   };
 }

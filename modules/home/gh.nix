@@ -4,7 +4,8 @@
   programs.gh = {
     enable = true;
 
-    # Enable git credential helper to avoid permission issues
+    # Enable git credential helper to avoid permission issues, without this
+    # the gh auth login won't work correctly.
     gitCredentialHelper.enable = true;
 
     settings = {

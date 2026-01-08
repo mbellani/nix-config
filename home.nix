@@ -11,6 +11,7 @@
     ./modules/home/starship.nix
     ./modules/home/zsh.nix
     ./modules/home/linux.nix
+    ./modules/home/fzf.nix
   ];
 
   home.username = username;

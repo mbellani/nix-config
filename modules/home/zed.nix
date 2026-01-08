@@ -34,6 +34,7 @@
           model = "claude-opus-4-5-20250514";
         };
       };
+      autosave = "on_focus_change";
     };
   };
 }

@@ -2,8 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    bat  # Better cat with syntax highlighting
-    fd   # Better find
+    bat
+    fd
   ];
 
   programs.fzf = {

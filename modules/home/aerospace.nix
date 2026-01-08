@@ -69,9 +69,9 @@
 
       # Layout manipulation
       alt-f = 'fullscreen'
-      alt-s = 'layout v_accordion'
-      alt-w = 'layout h_accordion'
-      alt-e = 'layout tiles horizontal vertical'
+      alt-shift-s = 'layout v_accordion'
+      alt-shift-w = 'layout h_accordion'
+      alt-shift-t = 'layout tiles horizontal vertical'
 
       # Toggle floating
       alt-shift-space = 'layout floating tiling'

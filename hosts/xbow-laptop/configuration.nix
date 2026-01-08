@@ -37,6 +37,14 @@
   # Programs
   programs.zsh.enable = true;
 
+  # Homebrew
+  homebrew = {
+    enable = true;
+    casks = [
+      "nikitabobko/tap/aerospace"
+    ];
+  };
+
   # Security - Enable Touch ID for sudo
   security.pam.services.sudo_local.touchIdAuth = true;
 

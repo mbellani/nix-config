@@ -12,6 +12,7 @@
     ./modules/home/zsh.nix
     ./modules/home/linux.nix
     ./modules/home/fzf.nix
+    ./modules/home/aerospace.nix
   ];
 
   home.username = username;
@@ -24,6 +25,7 @@
     awscli2
     jq
     ripgrep
+    terraform
     unzip
     claude-code
     claude-code-acp

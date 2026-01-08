@@ -30,5 +30,10 @@
       "--sort"
       "--exact"
     ];
+
+    # Default options applied to all fzf invocations
+    defaultOptions = [
+      "--preview 'bat --color=always --style=numbers --line-range=:500 {} 2>/dev/null || ls -la {}'"
+    ];
   };
 }

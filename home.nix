@@ -13,6 +13,7 @@
     ./modules/home/linux.nix
     ./modules/home/fzf.nix
     ./modules/home/aerospace.nix
+    ./modules/home/ghostty.nix
   ];
 
   home.username = username;
@@ -33,9 +34,7 @@
   ] ++ lib.optionals stdenv.isLinux [
     _1password-gui
     google-chrome
-    ghostty
   ] ++ lib.optionals stdenv.isDarwin [
-    ghostty-bin
     notion-app
   ];
 

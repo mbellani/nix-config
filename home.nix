@@ -33,6 +33,7 @@
     claude-code-acp
     slack
     nerd-fonts.hack
+    btop
   ] ++ lib.optionals stdenv.isLinux [
     _1password-gui
     google-chrome

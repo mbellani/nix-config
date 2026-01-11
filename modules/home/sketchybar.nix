@@ -3,7 +3,7 @@
 {
   # Sketchybar is only of MacOs. Don't care about it on my framework laptop
   config = lib.mkIf pkgs.stdenv.isDarwin {
-    # Install sketchybar
+    # Install sketchybar and app font
     home.packages = with pkgs; [
       sketchybar
     ];
@@ -22,6 +22,11 @@
         export SUBTEXT_COLOR=0xffa6adc8
       '';
       executable = true;
+    };
+
+    # Icon map helper from sketchybar-app-font
+    home.file.".config/sketchybar/icon_map.sh" = {
+      source = "${pkgs.sketchybar-app-font}/bin/icon_map.sh";
     };
 
     # Sketchybar configuration
@@ -63,6 +68,19 @@
           icon.padding_left=4 \
           icon.padding_right=4
 
+        # Front app - shows current application with icon
+        $SKETCHYBAR --add event front_app_switched \
+          --add item front_app left \
+          --set front_app \
+            background.color=$ITEM_BG_COLOR \
+            background.corner_radius=5 \
+            background.height=24 \
+            icon.font="sketchybar-app-font:Regular:16.0" \
+            icon.color=$TEXT_COLOR \
+            label.color=$TEXT_COLOR \
+            script="$HOME/.config/sketchybar/plugins/front_app.sh" \
+          --subscribe front_app front_app_switched
+
         # Aerospace workspaces
         $SKETCHYBAR --add event aerospace_workspace_change
 
@@ -74,6 +92,7 @@
               background.corner_radius=5 \
               background.height=24 \
               background.drawing=on \
+              icon.font="sketchybar-app-font:Regular:14.0" \
               label="$sid" \
               click_script="aerospace workspace $sid" \
               script="$HOME/.config/sketchybar/plugins/aerospace.sh $sid"
@@ -126,6 +145,9 @@
 
         SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
 
+        # Source icon map
+        source "$HOME/.config/sketchybar/icon_map.sh"
+
         # Colors
         ITEM_BG_COLOR=0xff313244
         ACCENT_COLOR=0xff89b4fa
@@ -134,14 +156,31 @@
         # Get the currently focused workspace
         FOCUSED_WORKSPACE=$(${pkgs.aerospace}/bin/aerospace list-workspaces --focused)
 
+        # Get apps in this workspace
+        WORKSPACE_ID="$1"
+        APPS=$(${pkgs.aerospace}/bin/aerospace list-windows --workspace "$WORKSPACE_ID" | awk -F'|' '{gsub(/^ +| +$/, "", $2); print $2}')
+
+        # Create icon string from apps
+        ICON_STRING=""
+        if [ -n "$APPS" ]; then
+          while IFS= read -r app; do
+            __icon_map "$app"
+            ICON_STRING+="$icon_result "
+          done <<< "$APPS"
+        fi
+
         if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
           $SKETCHYBAR --set $NAME \
+            icon="$ICON_STRING" \
             background.color=$ACCENT_COLOR \
-            label.color=0xff000000
+            label.color=0xff000000 \
+            icon.color=0xff000000
         else
           $SKETCHYBAR --set $NAME \
+            icon="$ICON_STRING" \
             background.color=$ITEM_BG_COLOR \
-            label.color=$TEXT_COLOR
+            label.color=$TEXT_COLOR \
+            icon.color=$TEXT_COLOR
         fi
       '';
       executable = true;
@@ -210,6 +249,27 @@
         fi
 
         $SKETCHYBAR --set $NAME icon="$ICON" label="''${VOLUME}%"
+      '';
+      executable = true;
+    };
+
+    # Front app plugin
+    home.file.".config/sketchybar/plugins/front_app.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+
+        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+
+        # Source icon map
+        source "$HOME/.config/sketchybar/icon_map.sh"
+
+        # Get the front app name
+        FRONT_APP=$(osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true')
+
+        # Get the app icon
+        __icon_map "$FRONT_APP"
+
+        $SKETCHYBAR --set $NAME icon="$icon_result" label="$FRONT_APP"
       '';
       executable = true;
     };

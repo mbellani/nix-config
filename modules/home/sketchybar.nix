@@ -52,9 +52,9 @@
         # Default settings
         $SKETCHYBAR --default \
           updates=when_shown \
-          icon.font="SF Pro:Semibold:14.0" \
+          icon.font="Hack Nerd Font:Bold:14.0" \
           icon.color=$TEXT_COLOR \
-          label.font="SF Pro:Semibold:14.0" \
+          label.font="Hack Nerd Font:Regular:14.0" \
           label.color=$TEXT_COLOR \
           padding_left=5 \
           padding_right=5 \

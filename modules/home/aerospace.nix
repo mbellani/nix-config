@@ -17,14 +17,17 @@
       # Mouse follows focus
       on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
+      # Notify SketchyBar on workspace change
+      exec-on-workspace-change = ['/bin/bash', '-c', '${pkgs.sketchybar}/bin/sketchybar --trigger aerospace_workspace_change']
+
       # Gaps between windows
       [gaps]
-      inner.horizontal = 8
-      inner.vertical = 8
-      outer.left = 8
-      outer.bottom = 8
-      outer.top = 8
-      outer.right = 8
+      inner.horizontal = 4
+      inner.vertical = 4
+      outer.left = 4
+      outer.bottom = 4
+      outer.top = 4
+      outer.right = 4
 
       # Mode definitions
       [mode.main.binding]

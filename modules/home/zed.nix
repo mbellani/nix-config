@@ -18,7 +18,9 @@
     userSettings = {
       vim_mode = true;
       ui_font_size = 16;
+      ui_font_family = "Hack Nerd Font";
       buffer_font_size = 15;
+      buffer_font_family = "Hack Nerd Font";
       icon_theme = "Catppuccin Frappé";
       indent_guides = {
         coloring = "indent_aware";

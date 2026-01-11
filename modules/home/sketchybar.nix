@@ -161,13 +161,15 @@
         WORKSPACE_ID="$1"
         APPS=$(${pkgs.aerospace}/bin/aerospace list-windows --workspace "$WORKSPACE_ID" | awk -F'|' '{gsub(/^ +| +$/, "", $2); print $2}')
 
-        # Create icon string from apps
+        # Create icon string from apps (only unique apps)
         ICON_STRING=""
         if [ -n "$APPS" ]; then
+          # Get unique app names only
+          UNIQUE_APPS=$(echo "$APPS" | sort -u)
           while IFS= read -r app; do
             __icon_map "$app"
             ICON_STRING+="$icon_result "
-          done <<< "$APPS"
+          done <<< "$UNIQUE_APPS"
         fi
 
         if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
@@ -214,15 +216,15 @@
         fi
 
         if [[ $CHARGING != "" ]]; then
-          ICON=""
+          ICON="󰂄"
         elif [ $PERCENTAGE -gt 75 ]; then
-          ICON=""
+          ICON="󰁹"
         elif [ $PERCENTAGE -gt 50 ]; then
-          ICON=""
+          ICON="󰂀"
         elif [ $PERCENTAGE -gt 25 ]; then
-          ICON=""
+          ICON="󰁾"
         else
-          ICON=""
+          ICON="󰁺"
         fi
 
         $SKETCHYBAR --set $NAME icon="$ICON" label="''${PERCENTAGE}%"
@@ -240,13 +242,13 @@
         VOLUME=$(osascript -e "output volume of (get volume settings)")
 
         if [[ $VOLUME -eq 0 ]]; then
-          ICON=""
+          ICON="󰖁"
         elif [[ $VOLUME -lt 33 ]]; then
-          ICON=""
+          ICON="󰕿"
         elif [[ $VOLUME -lt 66 ]]; then
-          ICON=""
+          ICON="󰖀"
         else
-          ICON=""
+          ICON="󰕾"
         fi
 
         $SKETCHYBAR --set $NAME icon="$ICON" label="''${VOLUME}%"

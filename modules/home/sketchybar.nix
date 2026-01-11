@@ -8,6 +8,22 @@
       sketchybar
     ];
 
+    # Colors configuration
+    home.file.".config/sketchybar/colors.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+
+        # Catppuccin Mocha color scheme
+        export WHITE=0xffffffff
+        export BAR_COLOR=0xff1e1e2e
+        export ITEM_BG_COLOR=0xff313244
+        export ACCENT_COLOR=0xff89b4fa
+        export TEXT_COLOR=0xffcdd6f4
+        export SUBTEXT_COLOR=0xffa6adc8
+      '';
+      executable = true;
+    };
+
     # Sketchybar configuration
     home.file.".config/sketchybar/sketchybarrc" = {
       text = ''
@@ -17,12 +33,8 @@
 
         SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
 
-        # Color scheme
-        export BAR_COLOR=0xff1e1e2e
-        export ITEM_BG_COLOR=0xff313244
-        export ACCENT_COLOR=0xff89b4fa
-        export TEXT_COLOR=0xffcdd6f4
-        export SUBTEXT_COLOR=0xffa6adc8
+        # Source colors
+        source "$HOME/.config/sketchybar/colors.sh"
 
         # Bar appearance
         $SKETCHYBAR --bar \

@@ -20,6 +20,12 @@
       # Notify SketchyBar on workspace change
       exec-on-workspace-change = ['/bin/bash', '-c', '${pkgs.sketchybar}/bin/sketchybar --trigger aerospace_workspace_change']
 
+      # Notify JankyBorders on window focus change
+      after-startup-command = ['exec-and-forget ${pkgs.jankyborders}/bin/borders']
+
+      # Update borders when focus changes
+      exec-on-window-detected = ['/bin/bash', '-c', '${pkgs.jankyborders}/bin/borders']
+
       # Gaps between windows
       [gaps]
       inner.horizontal = 4

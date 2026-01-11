@@ -15,6 +15,7 @@
     ./modules/home/aerospace.nix
     ./modules/home/ghostty.nix
     ./modules/home/sketchybar.nix
+    ./modules/home/jankyborders.nix
   ];
 
   home.username = username;

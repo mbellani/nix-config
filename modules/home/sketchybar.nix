@@ -6,6 +6,7 @@
     # Install sketchybar and app font
     home.packages = with pkgs; [
       sketchybar
+      sketchybar-app-font
     ];
 
     # Colors configuration

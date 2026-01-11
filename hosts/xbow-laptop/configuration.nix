@@ -67,6 +67,7 @@
       AppleInterfaceStyle = "Dark";
       AppleShowAllExtensions = true;
       KeyRepeat = 2;
+      _HIHideMenuBar = true;
     };
   };
 

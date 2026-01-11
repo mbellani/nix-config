@@ -14,6 +14,7 @@
     ./modules/home/fzf.nix
     ./modules/home/aerospace.nix
     ./modules/home/ghostty.nix
+    ./modules/home/sketchybar.nix
   ];
 
   home.username = username;

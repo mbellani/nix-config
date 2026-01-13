@@ -35,6 +35,7 @@
     slack
     nerd-fonts.hack
     btop
+    lazydocker
   ] ++ lib.optionals stdenv.isLinux [
     _1password-gui
     google-chrome

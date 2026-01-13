@@ -14,6 +14,7 @@
       "typst"
       "docker"
       "dockerfile"
+      "terraform"
     ];
     userSettings = {
       vim_mode = true;

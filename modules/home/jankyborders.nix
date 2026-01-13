@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Only enable on macOS
   config = lib.mkIf pkgs.stdenv.isDarwin {
     # Use the official home-manager jankyborders service
     services.jankyborders = {

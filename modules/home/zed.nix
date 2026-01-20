@@ -26,6 +26,7 @@
       indent_guides = {
         coloring = "indent_aware";
       };
+      colorize_brackets = true;
       theme = {
         mode = "system";
         dark = "Catppuccin Frappé";

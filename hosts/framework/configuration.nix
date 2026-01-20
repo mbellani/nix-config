@@ -72,6 +72,7 @@
   # Programs
   programs.zsh.enable = true;
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true;
 
   # Nix Configuration
   nixpkgs.config.allowUnfree = true;

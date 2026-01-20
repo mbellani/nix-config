@@ -1,6 +1,11 @@
 { username }:
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -19,29 +24,32 @@
   ];
 
   home.username = username;
-  home.homeDirectory =
-    if pkgs.stdenv.isDarwin
-    then "/Users/${username}"
-    else "/home/${username}";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
 
-  home.packages = with pkgs; [
-    awscli2
-    jq
-    ripgrep
-    terraform
-    unzip
-    claude-code
-    claude-code-acp
-    slack
-    nerd-fonts.hack
-    btop
-    lazydocker
-  ] ++ lib.optionals stdenv.isLinux [
-    _1password-gui
-    google-chrome
-  ] ++ lib.optionals stdenv.isDarwin [
-    notion-app
-  ];
+  home.packages =
+    with pkgs;
+    [
+      awscli2
+      jq
+      ripgrep
+      terraform
+      unzip
+      claude-code
+      claude-code-acp
+      slack
+      nerd-fonts.hack
+      btop
+      lazydocker
+      nixd
+      nil
+    ]
+    ++ lib.optionals stdenv.isLinux [
+      _1password-gui
+      google-chrome
+    ]
+    ++ lib.optionals stdenv.isDarwin [
+      notion-app
+    ];
 
   # Enable bash for script compatibility
   programs.bash = {
@@ -53,7 +61,10 @@
   launchd.agents.colima = lib.mkIf pkgs.stdenv.isDarwin {
     enable = true;
     config = {
-      ProgramArguments = [ "${pkgs.colima}/bin/colima" "start" ];
+      ProgramArguments = [
+        "${pkgs.colima}/bin/colima"
+        "start"
+      ];
       RunAtLoad = true;
       KeepAlive = false;
       StandardOutPath = "/tmp/colima.out.log";

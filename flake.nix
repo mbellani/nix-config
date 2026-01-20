@@ -24,11 +24,11 @@
   outputs = inputs@{self, nixpkgs, nixpkgs-unstable, darwin, home-manager, home-manager-unstable, ...}: {
     # NixOS Configurations
     nixosConfigurations = {
-      framework = nixpkgs.lib.nixosSystem {
+      framework = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./hosts/framework/configuration.nix
-          home-manager.nixosModules.home-manager
+          home-manager-unstable.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

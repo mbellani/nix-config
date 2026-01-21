@@ -6,11 +6,18 @@
   networking.computerName = "xbow-laptop";
 
   # Nix Configuration
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.optimise.automatic = true;
   nix.gc = {
     automatic = true;
-    interval = { Weekday = 0; Hour = 2; Minute = 0; };
+    interval = {
+      Weekday = 0;
+      Hour = 2;
+      Minute = 0;
+    };
     options = "--delete-older-than 7d";
   };
 
@@ -70,6 +77,12 @@
       _HIHideMenuBar = true;
     };
   };
+
+  # Grant accessibility permissions to apps
+  security.accessibilityPermissions = [
+    "/Applications/Zed.app"
+    "/Applications/Ghostty.app"
+  ];
 
   # Primary user for system defaults
   system.primaryUser = "manish.bellani";

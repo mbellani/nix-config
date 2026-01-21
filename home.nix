@@ -41,6 +41,8 @@
       lazydocker
       nixd
       nil
+      nodejs
+      nodePackages.pnpm
     ]
     ++ lib.optionals stdenv.isLinux [
       _1password-gui

@@ -78,12 +78,6 @@
     };
   };
 
-  # Grant accessibility permissions to apps
-  security.accessibilityPermissions = [
-    "/Applications/Zed.app"
-    "/Applications/Ghostty.app"
-  ];
-
   # Primary user for system defaults
   system.primaryUser = "manish.bellani";
 

@@ -15,6 +15,7 @@
       "docker"
       "dockerfile"
       "terraform"
+      "kotlin"
     ];
     userSettings = {
       vim_mode = true;

@@ -31,6 +31,7 @@
     [
       awscli2
       jq
+      yq
       ripgrep
       terraform
       unzip
@@ -44,6 +45,7 @@
       nil
       nodejs
       nodePackages.pnpm
+      kubectl
     ]
     ++ lib.optionals stdenv.isLinux [
       _1password-gui

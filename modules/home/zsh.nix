@@ -15,6 +15,10 @@
       share = true;
     };
 
+    sessionVariables = {
+      EDITOR = "zed --wait";
+    };
+
     shellAliases = {
       ls = "ls --color=auto";
       ll = "ls -alF";

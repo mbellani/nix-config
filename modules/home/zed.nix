@@ -1,6 +1,17 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
+  # Create a symlink for Zed on macOS so that zed <project> can be used from the terminal.
+  home.file = lib.mkIf pkgs.stdenv.isDarwin {
+    ".local/bin/zed".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Applications/Home Manager Apps/Zed.app/Contents/MacOS/cli";
+  };
+
   programs.zed-editor = {
     enable = true;
     extensions = [

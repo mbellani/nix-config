@@ -46,6 +46,7 @@
       nodejs
       nodePackages.pnpm
       kubectl
+      k9s
     ]
     ++ lib.optionals stdenv.isLinux [
       _1password-gui

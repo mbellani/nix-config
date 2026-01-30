@@ -17,6 +17,7 @@
 
     sessionVariables = {
       EDITOR = "zed --wait";
+      PATH = "$HOME/bin:$PATH";
     };
 
     shellAliases = {

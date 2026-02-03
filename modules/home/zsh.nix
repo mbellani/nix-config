@@ -17,8 +17,11 @@
 
     sessionVariables = {
       EDITOR = "zed --wait";
-      PATH = "$HOME/bin:$PATH";
     };
+
+    envExtra = ''
+      export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+    '';
 
     shellAliases = {
       ls = "ls --color=auto";
@@ -28,6 +31,8 @@
       ".." = "cd ..";
       "..." = "cd ../..";
       grep = "rg";
+      # zed alias removed - using symlink at ~/.local/bin/zed instead
+      # (the CLI must come from the same Zed.app bundle that is running)
     };
 
     initContent = ''

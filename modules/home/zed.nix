@@ -6,7 +6,9 @@
 }:
 
 {
-  # Create a symlink for Zed on macOS so that zed <project> can be used from the terminal.
+  # Create a symlink for Zed CLI on macOS so that `zed .` works from the terminal.
+  # The CLI must come from the same Zed.app bundle that is running, otherwise it hangs
+  # waiting for a socket that doesn't exist.
   home.file = lib.mkIf pkgs.stdenv.isDarwin {
     ".local/bin/zed".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Applications/Home Manager Apps/Zed.app/Contents/MacOS/cli";

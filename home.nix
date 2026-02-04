@@ -21,6 +21,7 @@
     ./modules/home/sketchybar.nix
     ./modules/home/jankyborders.nix
     ./modules/home/colima.nix
+    ./modules/home/direnv.nix
   ];
 
   home.username = username;
@@ -47,6 +48,7 @@
       nodePackages.pnpm
       kubectl
       k9s
+      jetbrains.idea
     ]
     ++ lib.optionals stdenv.isLinux [
       _1password-gui

@@ -31,6 +31,23 @@
       "kotlin"
     ];
     userSettings = {
+      load_direnv = "direct";
+      languages = {
+        Kotlin = {
+          language_servers = ["kotlin-language-server"];
+        };
+      };
+      lsp = {
+        kotlin-language-server = {
+          settings = {
+            compiler = {
+              jvm = {
+                target = "21";
+              };
+            };
+          };
+        };
+      };
       vim_mode = true;
       ui_font_size = 16;
       ui_font_family = "Hack Nerd Font";

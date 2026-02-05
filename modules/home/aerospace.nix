@@ -28,9 +28,6 @@
       # Notify JankyBorders on window focus change
       after-startup-command = ['exec-and-forget ${pkgs.jankyborders}/bin/borders']
 
-      # Update borders when focus changes
-      exec-on-window-detected = ['/bin/bash', '-c', '${pkgs.jankyborders}/bin/borders']
-
       # Gaps between windows
       [gaps]
       inner.horizontal = 4

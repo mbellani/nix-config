@@ -90,7 +90,7 @@
         # Aerospace workspaces
         $SKETCHYBAR --add event aerospace_workspace_change
 
-        for sid in $(${pkgs.aerospace}/bin/aerospace list-workspaces --all); do
+        for sid in 1 2 3 4 5 6 7 8 9; do
           $SKETCHYBAR --add item space.$sid left \
             --subscribe space.$sid aerospace_workspace_change \
             --set space.$sid \

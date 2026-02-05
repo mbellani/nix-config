@@ -9,10 +9,18 @@
   # Create a symlink for Zed CLI on macOS so that `zed .` works from the terminal.
   # The CLI must come from the same Zed.app bundle that is running, otherwise it hangs
   # waiting for a socket that doesn't exist.
-  home.file = lib.mkIf pkgs.stdenv.isDarwin {
-    ".local/bin/zed".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Applications/Home Manager Apps/Zed.app/Contents/MacOS/cli";
-  };
+  home.file = lib.mkMerge [
+    (lib.mkIf pkgs.stdenv.isDarwin {
+      ".local/bin/zed".source =
+        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Applications/Home Manager Apps/Zed.app/Contents/MacOS/cli";
+    })
+    {
+      ".local/bin/kotlin-lsp-wrapper" = {
+        source = ./kotlin-lsp-wrapper.sh;
+        executable = true;
+      };
+    }
+  ];
 
   programs.zed-editor = {
     enable = true;
@@ -39,6 +47,9 @@
       };
       lsp = {
         kotlin-language-server = {
+          binary = {
+            path = "${config.home.homeDirectory}/.local/bin/kotlin-lsp-wrapper";
+          };
           settings = {
             compiler = {
               jvm = {

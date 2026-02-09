@@ -16,8 +16,10 @@
     })
     {
       ".local/bin/kotlin-lsp-wrapper" = {
-        source = ./kotlin-lsp-wrapper.sh;
-        executable = true;
+        source = pkgs.writeShellScript "kotlin-lsp-wrapper" ''
+          export JAVA_TOOL_OPTIONS="-Xmx8g"
+          exec ${pkgs.kotlin-language-server}/bin/kotlin-language-server "$@"
+        '';
       };
     }
   ];

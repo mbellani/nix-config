@@ -44,7 +44,7 @@
       load_direnv = "direct";
       languages = {
         Kotlin = {
-          language_servers = ["kotlin-language-server"];
+          language_servers = [ "kotlin-language-server" ];
         };
       };
       lsp = {

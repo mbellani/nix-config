@@ -49,6 +49,7 @@
       kubectl
       k9s
       jetbrains.idea
+      kubernetes-helm
     ]
     ++ lib.optionals stdenv.isLinux [
       _1password-gui

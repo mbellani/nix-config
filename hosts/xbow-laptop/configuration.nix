@@ -33,6 +33,9 @@
     colima
     docker
     docker-compose
+    amazon-ecr-credential-helper
+    visualvm
+    jdk
   ];
 
   # User Configuration

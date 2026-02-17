@@ -22,6 +22,7 @@
     ./modules/home/jankyborders.nix
     ./modules/home/colima.nix
     ./modules/home/direnv.nix
+    ./modules/home/tmux.nix
   ];
 
   home.username = username;
@@ -32,7 +33,7 @@
     [
       awscli2
       jq
-      yq
+      yq-go
       ripgrep
       terraform
       unzip

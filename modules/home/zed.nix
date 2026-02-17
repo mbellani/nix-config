@@ -27,6 +27,7 @@
   programs.zed-editor = {
     enable = true;
     extensions = [
+      "basher"
       "catppuccin"
       "git-firefly"
       "html"

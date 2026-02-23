@@ -23,6 +23,7 @@
     ./modules/home/colima.nix
     ./modules/home/direnv.nix
     ./modules/home/tmux.nix
+    ./modules/home/taws.nix
   ];
 
   home.username = username;

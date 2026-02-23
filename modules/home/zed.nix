@@ -14,14 +14,6 @@
       ".local/bin/zed".source =
         config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Applications/Home Manager Apps/Zed.app/Contents/MacOS/cli";
     })
-    {
-      ".local/bin/kotlin-lsp-wrapper" = {
-        source = pkgs.writeShellScript "kotlin-lsp-wrapper" ''
-          export JAVA_TOOL_OPTIONS="-Xmx8g"
-          exec ${pkgs.kotlin-language-server}/bin/kotlin-language-server "$@"
-        '';
-      };
-    }
   ];
 
   programs.zed-editor = {
@@ -45,21 +37,7 @@
       load_direnv = "direct";
       languages = {
         Kotlin = {
-          language_servers = [ "kotlin-language-server" ];
-        };
-      };
-      lsp = {
-        kotlin-language-server = {
-          binary = {
-            path = "${config.home.homeDirectory}/.local/bin/kotlin-lsp-wrapper";
-          };
-          settings = {
-            compiler = {
-              jvm = {
-                target = "21";
-              };
-            };
-          };
+          language_servers = [ "kotlin-lsp" ];
         };
       };
       vim_mode = true;

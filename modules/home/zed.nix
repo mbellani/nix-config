@@ -38,6 +38,7 @@
       languages = {
         Kotlin = {
           language_servers = [ "kotlin-lsp" ];
+          format_on_save = "off";
         };
       };
       vim_mode = true;

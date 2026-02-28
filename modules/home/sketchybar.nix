@@ -127,6 +127,28 @@
             background.padding_left=5 \
             background.padding_right=5
 
+        # Wifi
+        $SKETCHYBAR --add item wifi right \
+          --set wifi \
+            update_freq=10 \
+            script="$HOME/.config/sketchybar/plugins/wifi.sh" \
+            background.color=$ITEM_BG_COLOR \
+            background.corner_radius=5 \
+            background.height=24 \
+            background.padding_left=5 \
+            background.padding_right=5
+
+        # Tailscale
+        $SKETCHYBAR --add item tailscale right \
+          --set tailscale \
+            update_freq=10 \
+            script="$HOME/.config/sketchybar/plugins/tailscale.sh" \
+            background.color=$ITEM_BG_COLOR \
+            background.corner_radius=5 \
+            background.height=24 \
+            background.padding_left=5 \
+            background.padding_right=5
+
         # Volume
         $SKETCHYBAR --add item volume right \
           --set volume \
@@ -257,6 +279,59 @@
         fi
 
         $SKETCHYBAR --set $NAME icon="$ICON" label="''${VOLUME}%"
+      '';
+      executable = true;
+    };
+
+    # Wifi plugin
+    home.file.".config/sketchybar/plugins/wifi.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+
+        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+
+        RSSI=$(swift -e 'import CoreWLAN; let i = CWWiFiClient.shared().interface(); print(i?.powerOn() == true ? (i?.rssiValue() ?? 0) : -999)' 2>/dev/null)
+
+        if [ "$RSSI" = "-999" ] || [ -z "$RSSI" ]; then
+          ICON="󰤭"
+        elif [ "$RSSI" = "0" ]; then
+          ICON="󰤭"
+        elif [ "$RSSI" -gt -50 ]; then
+          ICON="󰤨"
+        elif [ "$RSSI" -gt -60 ]; then
+          ICON="󰤥"
+        elif [ "$RSSI" -gt -70 ]; then
+          ICON="󰤢"
+        else
+          ICON="󰤟"
+        fi
+
+        $SKETCHYBAR --set $NAME icon="$ICON" label=""
+      '';
+      executable = true;
+    };
+
+    # Tailscale plugin
+    home.file.".config/sketchybar/plugins/tailscale.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+
+        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+
+        TAILSCALE="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+        if [ ! -x "$TAILSCALE" ]; then
+          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xffa6adc8
+          exit 0
+        fi
+
+        STATUS=$("$TAILSCALE" status 2>/dev/null)
+
+        if [ $? -eq 0 ]; then
+          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xffa6e3a1
+        else
+          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xfff38ba8
+        fi
       '';
       executable = true;
     };

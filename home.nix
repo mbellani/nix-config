@@ -24,6 +24,7 @@
     ./modules/home/direnv.nix
     ./modules/home/tmux.nix
     ./modules/home/taws.nix
+    ./modules/home/tsui.nix
   ];
 
   home.username = username;

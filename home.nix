@@ -25,6 +25,7 @@
     ./modules/home/tmux.nix
     ./modules/home/taws.nix
     ./modules/home/tsui.nix
+    ./modules/home/typst.nix
   ];
 
   home.username = username;

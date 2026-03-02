@@ -63,6 +63,9 @@
         };
       };
       autosave = "on_focus_change";
+      edit_predictions = {
+        mode = "subtle";
+      };
     };
   };
 }

@@ -115,6 +115,18 @@
               script="$HOME/.config/sketchybar/plugins/aerospace.sh $sid"
         done
 
+        # Weather
+        $SKETCHYBAR --add item weather right \
+          --set weather \
+            update_freq=900 \
+            icon.color=$CYAN \
+            script="$HOME/.config/sketchybar/plugins/weather.sh" \
+            background.color=$ITEM_BG_COLOR \
+            background.corner_radius=5 \
+            background.height=24 \
+            background.padding_left=5 \
+            background.padding_right=5
+
         # Clock
         $SKETCHYBAR --add item clock right \
           --set clock \
@@ -245,13 +257,21 @@
         WORKSPACE_ID="$1"
         APPS=$(${pkgs.aerospace}/bin/aerospace list-windows --workspace "$WORKSPACE_ID" | awk -F'|' '{gsub(/^ +| +$/, "", $2); print $2}')
 
+        # Normalize known lowercase app names
+        normalize_app_name() {
+          case "$1" in
+            zed) echo "Zed" ;;
+            *) echo "$1" ;;
+          esac
+        }
+
         # Create icon string from apps (only unique apps)
         ICON_STRING=""
         if [ -n "$APPS" ]; then
           # Get unique app names only
           UNIQUE_APPS=$(echo "$APPS" | sort -u)
           while IFS= read -r app; do
-            __icon_map "$app"
+            __icon_map "$(normalize_app_name "$app")"
             ICON_STRING+="$icon_result "
           done <<< "$UNIQUE_APPS"
         fi
@@ -415,6 +435,61 @@
       executable = true;
     };
 
+    # Weather plugin
+    home.file.".config/sketchybar/plugins/weather.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+
+        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+
+        # Get location coordinates via macOS CoreLocation (fallback to SF)
+        LAT="37.7749"
+        LON="-122.4194"
+
+        # Fetch weather from Open-Meteo (free, no API key)
+        WEATHER=$(curl -s --max-time 10 "https://api.open-meteo.com/v1/forecast?latitude=$LAT&longitude=$LON&current=temperature_2m,weather_code&temperature_unit=fahrenheit")
+
+        if [ -z "$WEATHER" ]; then
+          $SKETCHYBAR --set $NAME icon="󰅤" label="--°F"
+          exit 0
+        fi
+
+        TEMP=$(echo "$WEATHER" | ${pkgs.jq}/bin/jq -r '.current.temperature_2m // empty' 2>/dev/null)
+        CODE=$(echo "$WEATHER" | ${pkgs.jq}/bin/jq -r '.current.weather_code // empty' 2>/dev/null)
+
+        if [ -z "$TEMP" ] || [ -z "$CODE" ]; then
+          $SKETCHYBAR --set $NAME icon="󰅤" label="--°F"
+          exit 0
+        fi
+
+        # Round temperature
+        TEMP_ROUND=$(printf "%.0f" "$TEMP")
+
+        # Map WMO weather codes to icons
+        case $CODE in
+          0)  ICON="󰖙" ;;   # Clear sky
+          1)  ICON="󰖙" ;;   # Mainly clear
+          2)  ICON="󰖕" ;;   # Partly cloudy
+          3)  ICON="󰖐" ;;   # Overcast
+          45|48) ICON="󰖑" ;; # Fog
+          51|53|55) ICON="󰖗" ;; # Drizzle
+          56|57) ICON="󰖗" ;; # Freezing drizzle
+          61|63|65) ICON="󰖖" ;; # Rain
+          66|67) ICON="󰖖" ;; # Freezing rain
+          71|73|75) ICON="󰖘" ;; # Snow
+          77) ICON="󰖘" ;;   # Snow grains
+          80|81|82) ICON="󰖖" ;; # Rain showers
+          85|86) ICON="󰖘" ;; # Snow showers
+          95) ICON="󰖓" ;;   # Thunderstorm
+          96|99) ICON="󰖓" ;; # Thunderstorm with hail
+          *)  ICON="󰖙" ;;
+        esac
+
+        $SKETCHYBAR --set $NAME icon="$ICON" label="''${TEMP_ROUND}°F"
+      '';
+      executable = true;
+    };
+
     # Front app plugin
     home.file.".config/sketchybar/plugins/front_app.sh" = {
       text = ''
@@ -428,8 +503,14 @@
         # Get the front app name
         FRONT_APP=$(osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true')
 
+        # Normalize known lowercase app names for icon_map lookup
+        case "$FRONT_APP" in
+          zed) ICON_LOOKUP="Zed" ;;
+          *) ICON_LOOKUP="$FRONT_APP" ;;
+        esac
+
         # Get the app icon
-        __icon_map "$FRONT_APP"
+        __icon_map "$ICON_LOOKUP"
 
         $SKETCHYBAR --set $NAME icon="$icon_result" label="$FRONT_APP"
       '';

@@ -119,8 +119,12 @@
         $SKETCHYBAR --add item clock right \
           --set clock \
             update_freq=10 \
-            icon= \
+            icon=" " \
             icon.color=$MAGENTA \
+            icon.font="Hack Nerd Font:Regular:12.0" \
+            icon.padding_right=0 \
+            label.font="Hack Nerd Font:Bold:14.0" \
+            label.color=$WHITE \
             script="$HOME/.config/sketchybar/plugins/clock.sh" \
             background.color=$ITEM_BG_COLOR \
             background.corner_radius=5 \
@@ -276,7 +280,11 @@
 
         SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
 
-        $SKETCHYBAR --set $NAME label="$(date '+%a %b %d %H:%M')"
+        DAY=$(date '+%a')
+        DATE=$(date '+%d %b')
+        TIME=$(date '+%H:%M')
+
+        $SKETCHYBAR --set $NAME icon="$DAY $DATE" label="$TIME"
       '';
       executable = true;
     };

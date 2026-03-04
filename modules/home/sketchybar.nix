@@ -34,6 +34,7 @@
         export CYAN=0xff46D9FF
         export ORANGE=0xffda8548
         export VIOLET=0xffa9a1e1
+        export BLUE_ALPHA=0x6651afef
       '';
       executable = true;
     };
@@ -162,6 +163,36 @@
             background.padding_left=5 \
             background.padding_right=5
 
+        # Bracket: system status group
+        $SKETCHYBAR --add bracket status battery wifi tailscale \
+          --set status \
+            background.color=$ITEM_BG_COLOR \
+            background.corner_radius=5 \
+            background.height=26
+
+        # CPU graph
+        $SKETCHYBAR --add item cpu_icon right \
+          --set cpu_icon \
+            icon= \
+            icon.color=$BLUE \
+            label.drawing=off \
+            padding_right=0 \
+            background.drawing=off
+
+        $SKETCHYBAR --add graph cpu_graph right 75 \
+          --set cpu_graph \
+            update_freq=2 \
+            graph.color=$BLUE \
+            graph.fill_color=$BLUE_ALPHA \
+            graph.line_width=1.0 \
+            label.drawing=off \
+            icon.drawing=off \
+            background.color=$ITEM_BG_COLOR \
+            background.corner_radius=5 \
+            background.height=24 \
+            background.drawing=on \
+            script="$HOME/.config/sketchybar/plugins/cpu.sh"
+
         # Volume
         $SKETCHYBAR --add item volume right \
           --set volume \
@@ -173,6 +204,13 @@
             background.padding_left=5 \
             background.padding_right=5 \
           --subscribe volume volume_change
+
+        # Bracket: workspace group
+        $SKETCHYBAR --add bracket spaces '/space\..*/' \
+          --set spaces \
+            background.color=$ITEM_BG_COLOR \
+            background.corner_radius=5 \
+            background.height=26
 
         # Finalize
         $SKETCHYBAR --update
@@ -347,6 +385,24 @@
         else
           $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xffff6c6b
         fi
+      '';
+      executable = true;
+    };
+
+    # CPU plugin (graph)
+    home.file.".config/sketchybar/plugins/cpu.sh" = {
+      text = ''
+        #!/usr/bin/env bash
+
+        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+
+        # Get CPU usage from top
+        CPU_IDLE=$(top -l 1 -n 0 | grep "CPU usage" | awk '{print $7}' | tr -d '%')
+        CPU_USED=$(echo "scale=2; (100 - $CPU_IDLE) / 100" | bc 2>/dev/null || echo "0.0")
+        CPU_PCT=$(echo "scale=0; (100 - $CPU_IDLE) / 1" | bc 2>/dev/null || echo "0")
+
+        $SKETCHYBAR --push $NAME "$CPU_USED"
+        $SKETCHYBAR --set cpu_icon label="''${CPU_PCT}%"
       '';
       executable = true;
     };

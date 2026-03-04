@@ -19,13 +19,21 @@
       text = ''
         #!/usr/bin/env bash
 
-        # Catppuccin Mocha color scheme
-        export WHITE=0xffffffff
-        export BAR_COLOR=0xff1e1e2e
-        export ITEM_BG_COLOR=0xff313244
-        export ACCENT_COLOR=0xff89b4fa
-        export TEXT_COLOR=0xffcdd6f4
-        export SUBTEXT_COLOR=0xffa6adc8
+        # Doom One color scheme
+        export WHITE=0xffDFDFDF
+        export BAR_COLOR=0xff282c34
+        export ITEM_BG_COLOR=0xff3f444a
+        export ACCENT_COLOR=0xff51afef
+        export TEXT_COLOR=0xffbbc2cf
+        export SUBTEXT_COLOR=0xff5B6268
+        export RED=0xffff6c6b
+        export GREEN=0xff98be65
+        export YELLOW=0xffECBE7B
+        export BLUE=0xff51afef
+        export MAGENTA=0xffc678dd
+        export CYAN=0xff46D9FF
+        export ORANGE=0xffda8548
+        export VIOLET=0xffa9a1e1
       '';
       executable = true;
     };
@@ -49,8 +57,10 @@
 
         # Bar appearance
         $SKETCHYBAR --bar \
-          height=32 \
+          height=34 \
           color=$BAR_COLOR \
+          border_color=$ITEM_BG_COLOR \
+          border_width=1 \
           shadow=off \
           position=top \
           sticky=on \
@@ -78,12 +88,12 @@
         $SKETCHYBAR --add event front_app_switched \
           --add item front_app left \
           --set front_app \
-            background.color=$ITEM_BG_COLOR \
+            background.color=$ACCENT_COLOR \
             background.corner_radius=5 \
             background.height=24 \
             icon.font="sketchybar-app-font:Regular:16.0" \
-            icon.color=$TEXT_COLOR \
-            label.color=$TEXT_COLOR \
+            icon.color=0xff282c34 \
+            label.color=0xff282c34 \
             script="$HOME/.config/sketchybar/plugins/front_app.sh" \
           --subscribe front_app front_app_switched
 
@@ -109,6 +119,7 @@
           --set clock \
             update_freq=10 \
             icon= \
+            icon.color=$MAGENTA \
             script="$HOME/.config/sketchybar/plugins/clock.sh" \
             background.color=$ITEM_BG_COLOR \
             background.corner_radius=5 \
@@ -120,6 +131,7 @@
         $SKETCHYBAR --add item battery right \
           --set battery \
             update_freq=120 \
+            icon.color=$GREEN \
             script="$HOME/.config/sketchybar/plugins/battery.sh" \
             background.color=$ITEM_BG_COLOR \
             background.corner_radius=5 \
@@ -131,6 +143,7 @@
         $SKETCHYBAR --add item wifi right \
           --set wifi \
             update_freq=10 \
+            icon.color=$CYAN \
             script="$HOME/.config/sketchybar/plugins/wifi.sh" \
             background.color=$ITEM_BG_COLOR \
             background.corner_radius=5 \
@@ -152,6 +165,7 @@
         # Volume
         $SKETCHYBAR --add item volume right \
           --set volume \
+            icon.color=$VIOLET \
             script="$HOME/.config/sketchybar/plugins/volume.sh" \
             background.color=$ITEM_BG_COLOR \
             background.corner_radius=5 \
@@ -176,10 +190,11 @@
         # Source icon map
         source "$HOME/.config/sketchybar/icon_map.sh"
 
-        # Colors
-        ITEM_BG_COLOR=0xff313244
-        ACCENT_COLOR=0xff89b4fa
-        TEXT_COLOR=0xffcdd6f4
+        # Doom One colors
+        ITEM_BG_COLOR=0xff3f444a
+        ACCENT_COLOR=0xff51afef
+        TEXT_COLOR=0xffbbc2cf
+        SUBTEXT_COLOR=0xff5B6268
 
         # Get the currently focused workspace
         FOCUSED_WORKSPACE=$(${pkgs.aerospace}/bin/aerospace list-workspaces --focused)
@@ -203,8 +218,8 @@
           $SKETCHYBAR --set $NAME \
             icon="$ICON_STRING" \
             background.color=$ACCENT_COLOR \
-            label.color=0xff000000 \
-            icon.color=0xff000000
+            label.color=0xff282c34 \
+            icon.color=0xff282c34
         else
           $SKETCHYBAR --set $NAME \
             icon="$ICON_STRING" \
@@ -321,16 +336,16 @@
         TAILSCALE="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
         if [ ! -x "$TAILSCALE" ]; then
-          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xffa6adc8
+          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xff5B6268
           exit 0
         fi
 
         STATUS=$("$TAILSCALE" status 2>/dev/null)
 
         if [ $? -eq 0 ]; then
-          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xffa6e3a1
+          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xff98be65
         else
-          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xfff38ba8
+          $SKETCHYBAR --set $NAME icon="󰖂" label="" icon.color=0xffff6c6b
         fi
       '';
       executable = true;

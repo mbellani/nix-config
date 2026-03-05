@@ -6,6 +6,8 @@
       email = manish.bellani@xbow.com
   '';
 
+  home.packages = [ pkgs.delta ];
+
   programs.git = {
     enable = true;
 
@@ -13,6 +15,15 @@
       user.name = "Manish Bellani";
       user.email = "manish.bellani@gmail.com";
       init.defaultBranch = "main";
+      core.pager = "delta";
+      interactive.diffFilter = "delta --color-only";
+      delta = {
+        dark = true;
+        side-by-side = false;
+        line-numbers = true;
+        syntax-theme = "OneHalfDark";
+        navigate = true;
+      };
       # Always use SSH for GitHub
       url."ssh://git@github.com/".insteadOf = "https://github.com/";
     };

@@ -53,6 +53,7 @@
     casks = [
       "nikitabobko/tap/aerospace"
       "granola"
+      "intellij-idea-ce"
     ];
   };
 

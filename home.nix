@@ -52,8 +52,8 @@
       nodePackages.pnpm
       kubectl
       k9s
-      jetbrains.idea
       kubernetes-helm
+      uv
     ]
     ++ lib.optionals stdenv.isLinux [
       _1password-gui

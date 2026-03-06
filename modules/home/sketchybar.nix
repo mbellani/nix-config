@@ -371,23 +371,17 @@
 
         SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
 
-        RSSI=$(swift -e 'import CoreWLAN; let i = CWWiFiClient.shared().interface(); print(i?.powerOn() == true ? (i?.rssiValue() ?? 0) : -999)' 2>/dev/null)
+        SSID=$(networksetup -getairportnetwork en0 2>/dev/null | sed 's/Current Wi-Fi Network: //')
 
-        if [ "$RSSI" = "-999" ] || [ -z "$RSSI" ]; then
+        if [ -z "$SSID" ] || [ "$SSID" = "You are not associated with an AirPort network." ]; then
           ICON="󰤭"
-        elif [ "$RSSI" = "0" ]; then
-          ICON="󰤭"
-        elif [ "$RSSI" -gt -50 ]; then
-          ICON="󰤨"
-        elif [ "$RSSI" -gt -60 ]; then
-          ICON="󰤥"
-        elif [ "$RSSI" -gt -70 ]; then
-          ICON="󰤢"
+          LABEL=""
         else
-          ICON="󰤟"
+          ICON="󰤨"
+          LABEL="$SSID"
         fi
 
-        $SKETCHYBAR --set $NAME icon="$ICON" label=""
+        $SKETCHYBAR --set $NAME icon="$ICON" label="$LABEL"
       '';
       executable = true;
     };

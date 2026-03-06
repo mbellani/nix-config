@@ -52,6 +52,7 @@
     enable = true;
     casks = [
       "nikitabobko/tap/aerospace"
+      "granola"
     ];
   };
 

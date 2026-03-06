@@ -187,17 +187,9 @@
             background.height=26
 
         # CPU graph
-        $SKETCHYBAR --add item cpu_icon right \
-          --set cpu_icon \
-            icon= \
-            icon.color=$BLUE \
-            label.drawing=off \
-            padding_right=0 \
-            background.drawing=off
-
         $SKETCHYBAR --add graph cpu_graph right 75 \
           --set cpu_graph \
-            update_freq=2 \
+            update_freq=10 \
             graph.color=$BLUE \
             graph.fill_color=$BLUE_ALPHA \
             graph.line_width=1.0 \
@@ -371,17 +363,13 @@
 
         SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
 
-        SSID=$(networksetup -getairportnetwork en0 2>/dev/null | sed 's/Current Wi-Fi Network: //')
-
-        if [ -z "$SSID" ] || [ "$SSID" = "You are not associated with an AirPort network." ]; then
-          ICON="󰤭"
-          LABEL=""
-        else
+        if [ -n "$(ipconfig getifaddr en0 2>/dev/null)" ]; then
           ICON="󰤨"
-          LABEL="$SSID"
+        else
+          ICON="󰤭"
         fi
 
-        $SKETCHYBAR --set $NAME icon="$ICON" label="$LABEL"
+        $SKETCHYBAR --set $NAME icon="$ICON" label=""
       '';
       executable = true;
     };
@@ -421,10 +409,8 @@
         # Get CPU usage from top
         CPU_IDLE=$(top -l 1 -n 0 | grep "CPU usage" | awk '{print $7}' | tr -d '%')
         CPU_USED=$(echo "scale=2; (100 - $CPU_IDLE) / 100" | bc 2>/dev/null || echo "0.0")
-        CPU_PCT=$(echo "scale=0; (100 - $CPU_IDLE) / 1" | bc 2>/dev/null || echo "0")
 
         $SKETCHYBAR --push $NAME "$CPU_USED"
-        $SKETCHYBAR --set cpu_icon label="''${CPU_PCT}%"
       '';
       executable = true;
     };

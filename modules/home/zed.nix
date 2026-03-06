@@ -53,7 +53,7 @@
       colorize_brackets = true;
       theme = {
         mode = "system";
-        dark = "Catppuccin Frappé";
+        dark = "Catppuccin Mocha";
         light = "Catppuccin Latte";
       };
       agent = {

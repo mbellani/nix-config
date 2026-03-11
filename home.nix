@@ -26,6 +26,7 @@
     ./modules/home/taws.nix
     ./modules/home/tsui.nix
     ./modules/home/typst.nix
+    ./modules/home/raycast.nix
   ];
 
   home.username = username;

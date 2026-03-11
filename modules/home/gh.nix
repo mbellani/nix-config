@@ -8,7 +8,7 @@
 {
   home.activation.installGhExtensions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     GH="${pkgs.gh}/bin/gh"
-    for ext in dlvhdr/gh-dash xbow-engineering/gh-xbow; do
+    for ext in dlvhdr/gh-dash dlvhdr/gh-enhance xbow-engineering/gh-xbow; do
       name="''${ext#*/}"
       if [ ! -d "$HOME/.local/share/gh/extensions/$name" ]; then
         $GH extension install "$ext" 2>/dev/null || true
@@ -114,7 +114,12 @@
     keybindings = {
       universal = [ ];
       issues = [ ];
-      prs = [ ];
+      prs = [
+        {
+          key = "T";
+          command = "gh enhance -R {{.RepoName}} {{.PrNumber}}";
+        }
+      ];
       branches = [ ];
     };
     repoPaths = { };

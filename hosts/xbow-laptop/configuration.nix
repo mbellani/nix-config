@@ -62,6 +62,24 @@
 
   # macOS-specific settings
   system.defaults = {
+    # Disable Spotlight Cmd+Space so Raycast can use it
+    CustomSystemPreferences = {
+      "com.apple.symbolichotkeys" = {
+        AppleSymbolicHotKeys = {
+          "64" = {
+            enabled = false;
+            value = {
+              parameters = [
+                32
+                49
+                1048576
+              ];
+              type = "standard";
+            };
+          };
+        };
+      };
+    };
     dock = {
       autohide = true;
       orientation = "bottom";

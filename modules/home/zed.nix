@@ -32,9 +32,26 @@
       "dockerfile"
       "terraform"
       "kotlin"
+      "latex"
     ];
     userSettings = {
       load_direnv = "direct";
+      lsp = {
+        kotlin-lsp = {
+          initialization_options = {
+            java = {
+              home = "${pkgs.jdk}";
+            };
+          };
+          settings = {
+            compiler = {
+              jvm = {
+                target = "21";
+              };
+            };
+          };
+        };
+      };
       languages = {
         Kotlin = {
           language_servers = [ "kotlin-lsp" ];

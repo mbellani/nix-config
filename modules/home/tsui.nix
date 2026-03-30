@@ -15,9 +15,13 @@ let
     vendorHash = "sha256-FIbkPE5KQ4w7Tc7kISQ7ZYFZAoMNGiVlFWzt8BPCf+A=";
     ldflags = [ "-X main.Version=0.2.1" ];
 
-    buildInputs = lib.optionals pkgs.stdenv.isDarwin [
-      pkgs.apple-sdk_15
-    ];
+    buildInputs =
+      lib.optionals pkgs.stdenv.isDarwin [
+        pkgs.apple-sdk_15
+      ]
+      ++ lib.optionals pkgs.stdenv.isLinux [
+        pkgs.xorg.libX11
+      ];
 
     meta = {
       description = "An elegant TUI for configuring Tailscale";

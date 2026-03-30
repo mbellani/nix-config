@@ -43,7 +43,6 @@
       terraform
       unzip
       claude-code
-      claude-code-acp
       slack
       nerd-fonts.hack
       btop

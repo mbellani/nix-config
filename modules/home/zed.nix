@@ -6,6 +6,17 @@
 }:
 
 {
+  xdg.configFile."zed/tasks.json".text = builtins.toJSON [
+    {
+      label = "gh-dash";
+      command = "gh";
+      args = [ "dash" ];
+      reveal = "always";
+      reveal_target = "center";
+      hide = "never";
+    }
+  ];
+
   # Create a symlink for Zed CLI on macOS so that `zed .` works from the terminal.
   # The CLI must come from the same Zed.app bundle that is running, otherwise it hangs
   # waiting for a socket that doesn't exist.

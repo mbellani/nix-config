@@ -13,7 +13,7 @@
       if [ ! -d "$HOME/.local/share/gh/extensions/$name" ]; then
         $GH extension install "$ext" 2>/dev/null || true
       else
-        $GH extension upgrade "$ext" 2>/dev/null || true
+        $GH extension upgrade "$name" 2>/dev/null || true
       fi
     done
   '';

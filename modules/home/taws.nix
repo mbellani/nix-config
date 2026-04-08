@@ -14,6 +14,9 @@ let
 
     cargoHash = "sha256-7zZ2JJVQem2R072sefv2oB9mmQcRuUHVKKcb+HEnm6Y=";
 
+    # Tests fail in the nix sandbox (no HOME, no AWS credentials)
+    doCheck = false;
+
     meta = with pkgs.lib; {
       description = "Terminal UI for AWS";
       homepage = "https://github.com/huseyinbabal/taws";

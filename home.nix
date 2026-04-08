@@ -50,7 +50,7 @@
       nixd
       nil
       nodejs
-      nodePackages.pnpm
+      pnpm
       kubectl
       k9s
       kubernetes-helm

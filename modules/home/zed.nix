@@ -84,11 +84,30 @@
         dark = "Catppuccin Mocha";
         light = "Catppuccin Latte";
       };
+      language_models = {
+        ollama = {
+          api_url = "http://localhost:11434";
+          available_models = [
+            {
+              name = "gemma4:31b";
+              display_name = "Gemma 4 31B";
+              max_tokens = 131072;
+              keep_alive = "30m";
+            }
+          ];
+        };
+      };
       agent = {
         default_model = {
           provider = "anthropic";
           model = "claude-opus-4-5-20250514";
         };
+        favorite_models = [
+          {
+            provider = "ollama";
+            model = "gemma4:31b";
+          }
+        ];
       };
       autosave = "on_focus_change";
       edit_predictions = {

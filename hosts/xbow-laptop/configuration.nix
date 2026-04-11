@@ -54,6 +54,7 @@
       "nikitabobko/tap/aerospace"
       "granola"
       "intellij-idea-ce"
+      "ollama-app"
     ];
   };
 

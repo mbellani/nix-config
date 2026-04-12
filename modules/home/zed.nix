@@ -44,6 +44,7 @@
       "terraform"
       "kotlin"
       "latex"
+      "haskell"
     ];
     userSettings = {
       load_direnv = "direct";

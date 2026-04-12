@@ -28,6 +28,7 @@
     ./modules/home/typst.nix
     ./modules/home/raycast.nix
     ./modules/home/latex.nix
+    ./modules/home/haskell.nix
   ];
 
   home.username = username;

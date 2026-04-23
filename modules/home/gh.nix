@@ -10,11 +10,10 @@
     GH="${pkgs.gh}/bin/gh"
     for ext in dlvhdr/gh-dash dlvhdr/gh-enhance xbow-engineering/gh-xbow; do
       name="''${ext#*/}"
-      if [ ! -d "$HOME/.local/share/gh/extensions/$name" ]; then
-        $GH extension install "$ext" 2>/dev/null || true
-      else
-        $GH extension upgrade "$name" 2>/dev/null || true
-      fi
+      # Remove gh- prefix to get the short name gh uses
+      short_name="''${name#gh-}"
+      $GH extension remove "$short_name" 2>/dev/null || true
+      $GH extension install "$ext" 2>/dev/null || true
     done
   '';
 

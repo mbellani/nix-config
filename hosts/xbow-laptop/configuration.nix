@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  cliTools = import ../../modules/shared/cli-tools.nix { inherit pkgs; };
+in
 {
   # Networking
   networking.hostName = "xbow-laptop";
@@ -50,26 +53,7 @@
   # Homebrew
   homebrew = {
     enable = true;
-    brews = [
-      "awscli"
-      "jq"
-      "yq"
-      "ripgrep"
-      "btop"
-      "lazydocker"
-      "kubernetes-cli"
-      "k9s"
-      "helm"
-      "uv"
-      "node"
-      "pnpm"
-      "unzip"
-      "ghc"
-      "cabal-install"
-      "haskell-stack"
-      "haskell-language-server"
-      "texlive"
-    ];
+    brews = map (t: t.brew) cliTools;
     casks = [
       "nikitabobko/tap/aerospace"
       "claude-code"

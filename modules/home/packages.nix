@@ -6,6 +6,8 @@
 }:
 
 let
+  cliTools = import ../shared/cli-tools.nix { inherit pkgs; };
+
   # Shared across all platforms, always installed via nix
   shared = with pkgs; [
     nixd
@@ -13,24 +15,6 @@ let
     nerd-fonts.hack
     slack
     terraform
-  ];
-
-  # On Linux these are installed via nix.
-  # On macOS they are installed via Homebrew (see hosts/xbow-laptop/configuration.nix).
-  cliTools = with pkgs; [
-    awscli2
-    btop
-    jq
-    k9s
-    kubectl
-    kubernetes-helm
-    lazydocker
-    nodejs
-    pnpm
-    ripgrep
-    unzip
-    uv
-    yq-go
   ];
 
   # Linux-only GUI apps
@@ -47,6 +31,6 @@ in
 {
   home.packages =
     shared
-    ++ lib.optionals pkgs.stdenv.isLinux (cliTools ++ linuxApps)
+    ++ lib.optionals pkgs.stdenv.isLinux ((map (t: t.nix) cliTools) ++ linuxApps)
     ++ lib.optionals pkgs.stdenv.isDarwin darwinApps;
 }

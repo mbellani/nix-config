@@ -50,8 +50,29 @@
   # Homebrew
   homebrew = {
     enable = true;
+    brews = [
+      "awscli"
+      "jq"
+      "yq"
+      "ripgrep"
+      "btop"
+      "lazydocker"
+      "kubernetes-cli"
+      "k9s"
+      "helm"
+      "uv"
+      "node"
+      "pnpm"
+      "unzip"
+      "ghc"
+      "cabal-install"
+      "haskell-stack"
+      "haskell-language-server"
+      "texlive"
+    ];
     casks = [
       "nikitabobko/tap/aerospace"
+      "claude-code"
       "granola"
       "intellij-idea-ce"
       "ollama-app"

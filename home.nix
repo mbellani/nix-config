@@ -30,41 +30,11 @@
     ./modules/home/latex.nix
     ./modules/home/haskell.nix
     ./modules/home/claude.nix
+    ./modules/home/packages.nix
   ];
 
   home.username = username;
   home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
-
-  home.packages =
-    with pkgs;
-    [
-      awscli2
-      jq
-      yq-go
-      ripgrep
-      terraform
-      unzip
-      claude-code
-      slack
-      nerd-fonts.hack
-      btop
-      lazydocker
-      nixd
-      nil
-      nodejs
-      pnpm
-      kubectl
-      k9s
-      kubernetes-helm
-      uv
-    ]
-    ++ lib.optionals stdenv.isLinux [
-      _1password-gui
-      google-chrome
-    ]
-    ++ lib.optionals stdenv.isDarwin [
-      notion-app
-    ];
 
   # Enable bash for script compatibility
   programs.bash = {

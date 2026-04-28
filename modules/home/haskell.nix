@@ -1,10 +1,18 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  home.packages = with pkgs; [
-    ghc
-    cabal-install
-    stack
-    haskell-language-server
-  ];
+  home.packages = lib.optionals pkgs.stdenv.isLinux (
+    with pkgs;
+    [
+      ghc
+      cabal-install
+      stack
+      haskell-language-server
+    ]
+  );
 }

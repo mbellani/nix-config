@@ -53,6 +53,11 @@ in
   # Homebrew
   homebrew = {
     enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "uninstall"; # remove formulae not listed here
+    };
     brews = map (t: t.brew) cliTools;
     casks = [
       "nikitabobko/tap/aerospace"

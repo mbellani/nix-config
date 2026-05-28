@@ -45,6 +45,7 @@
       "kotlin"
       "latex"
       "haskell"
+      "claude-code-inspired-dark"
     ];
     userSettings = {
       load_direnv = "direct";
@@ -82,7 +83,7 @@
       colorize_brackets = true;
       theme = {
         mode = "system";
-        dark = "Catppuccin Mocha";
+        dark = "Claude Code Inspired Dark";
         light = "Catppuccin Latte";
       };
       language_models = {

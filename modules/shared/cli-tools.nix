@@ -63,6 +63,16 @@
     brew = "yq";
   }
 
+  {
+    nix = pkgs.glow;
+    brew = "glow";
+  }
+
+  {
+    nix = pkgs.postgresql;
+    brew = "libpq";
+  }
+
   # Haskell toolchain
   {
     nix = pkgs.ghc;

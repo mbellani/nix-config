@@ -62,9 +62,11 @@ in
     casks = [
       "nikitabobko/tap/aerospace"
       "claude-code"
+      "codex"
       "granola"
       "intellij-idea-ce"
       "ollama-app"
+      "session-manager-plugin"
     ];
   };
 

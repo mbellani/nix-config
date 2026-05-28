@@ -14,6 +14,11 @@
       # Transparency settings
       background-opacity = 0.9;
       background-blur = 20;
+
+      keybind = [
+        "shift+up=csi:5~"
+        "shift+down=csi:6~"
+      ];
     };
   };
 }

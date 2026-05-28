@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.zsh = {
@@ -21,6 +21,8 @@
 
     envExtra = ''
       export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+    '' + lib.optionalString pkgs.stdenv.isDarwin ''
+      export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
     '';
 
     shellAliases = {

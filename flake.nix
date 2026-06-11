@@ -38,6 +38,7 @@
             nixpkgs.overlays = [ inputs.llm-agents.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.users.mbellani = import ./home.nix { username = "mbellani"; };
           }
         ];
@@ -55,6 +56,7 @@
             nixpkgs.overlays = [ inputs.llm-agents.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
             home-manager.users."manish.bellani" = import ./home.nix { username = "manish.bellani"; };
           }
         ];

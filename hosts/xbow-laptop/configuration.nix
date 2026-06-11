@@ -13,6 +13,8 @@ in
     "nix-command"
     "flakes"
   ];
+  nix.settings.extra-substituters = [ "https://cache.numtide.com" ];
+  nix.settings.extra-trusted-public-keys = [ "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" ];
   nix.optimise.automatic = true;
   nix.gc = {
     automatic = true;
@@ -57,10 +59,17 @@ in
       autoUpdate = true;
       upgrade = true;
       cleanup = "uninstall"; # remove formulae not listed here
+      # Homebrew (2026-05-24+) refuses non-interactive `brew bundle --cleanup`
+      # without an explicit force flag. nix-darwin emits bare `--cleanup`, so
+      # append --force-cleanup here to keep activation non-interactive.
+      # NOTE: --cleanup now also uninstalls Mac App Store apps absent from the
+      # Brewfile; forcing it skips Homebrew's new confirmation prompt.
+      extraFlags = [ "--force-cleanup" ];
     };
     brews = map (t: t.brew) cliTools;
     casks = [
       "nikitabobko/tap/aerospace"
+      "agentsview"
       "claude-code"
       "codex"
       "granola"

@@ -19,6 +19,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs@{self, nixpkgs, nixpkgs-unstable, darwin, home-manager, home-manager-unstable, ...}: {
@@ -30,6 +35,7 @@
           ./hosts/framework/configuration.nix
           home-manager-unstable.nixosModules.home-manager
           {
+            nixpkgs.overlays = [ inputs.llm-agents.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.mbellani = import ./home.nix { username = "mbellani"; };
@@ -46,6 +52,7 @@
           ./hosts/xbow-laptop/configuration.nix
           home-manager-unstable.darwinModules.home-manager
           {
+            nixpkgs.overlays = [ inputs.llm-agents.overlays.default ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users."manish.bellani" = import ./home.nix { username = "manish.bellani"; };

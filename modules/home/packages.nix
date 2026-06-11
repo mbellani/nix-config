@@ -15,6 +15,7 @@ let
     nerd-fonts.hack
     slack
     terraform
+    llm-agents.pi
   ];
 
   # Linux-only GUI apps

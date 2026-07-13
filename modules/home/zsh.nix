@@ -22,6 +22,10 @@
     envExtra = ''
       export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
     '' + lib.optionalString pkgs.stdenv.isDarwin ''
+      # Homebrew bin/sbin are normally added by macOS path_helper, which only
+      # runs for login shells. Ghostty launches a non-login shell, so add them
+      # here (in .zshenv, read by all shells) to keep aws/brew/claude on PATH.
+      export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
       export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
     '';
 

@@ -35,7 +35,7 @@
           ./hosts/framework/configuration.nix
           home-manager-unstable.nixosModules.home-manager
           {
-            nixpkgs.overlays = [ inputs.llm-agents.overlays.default ];
+            nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
@@ -53,7 +53,7 @@
           ./hosts/xbow-laptop/configuration.nix
           home-manager-unstable.darwinModules.home-manager
           {
-            nixpkgs.overlays = [ inputs.llm-agents.overlays.default ];
+            nixpkgs.overlays = [ inputs.llm-agents.overlays.shared-nixpkgs ];
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";

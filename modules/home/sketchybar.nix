@@ -8,9 +8,9 @@
 {
   # Sketchybar is only of MacOs. Don't care about it on my framework laptop
   config = lib.mkIf pkgs.stdenv.isDarwin {
-    # Install sketchybar and app font
+    # sketchybar itself is installed via Homebrew (see hosts/xbow-laptop/configuration.nix);
+    # nixpkgs-unstable build crashes cctools ld. Only the app font comes from nix.
     home.packages = with pkgs; [
-      sketchybar
       sketchybar-app-font
     ];
 
@@ -51,7 +51,7 @@
 
         # Sketchybar configuration for Aerospace integration
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         # Source colors
         source "$HOME/.config/sketchybar/colors.sh"
@@ -231,7 +231,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         # Source icon map
         source "$HOME/.config/sketchybar/icon_map.sh"
@@ -243,11 +243,11 @@
         SUBTEXT_COLOR=0xff5B6268
 
         # Get the currently focused workspace
-        FOCUSED_WORKSPACE=$(${pkgs.aerospace}/bin/aerospace list-workspaces --focused)
+        FOCUSED_WORKSPACE=$(/opt/homebrew/bin/aerospace list-workspaces --focused)
 
         # Get apps in this workspace
         WORKSPACE_ID="$1"
-        APPS=$(${pkgs.aerospace}/bin/aerospace list-windows --workspace "$WORKSPACE_ID" | awk -F'|' '{gsub(/^ +| +$/, "", $2); print $2}')
+        APPS=$(/opt/homebrew/bin/aerospace list-windows --workspace "$WORKSPACE_ID" | awk -F'|' '{gsub(/^ +| +$/, "", $2); print $2}')
 
         # Normalize known lowercase app names
         normalize_app_name() {
@@ -290,7 +290,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         DAY=$(date '+%a')
         DATE=$(date '+%d %b')
@@ -306,7 +306,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         PERCENTAGE=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
         CHARGING=$(pmset -g batt | grep 'AC Power')
@@ -337,7 +337,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         VOLUME=$(osascript -e "output volume of (get volume settings)")
 
@@ -361,7 +361,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         if [ -n "$(ipconfig getifaddr en0 2>/dev/null)" ]; then
           ICON="󰤨"
@@ -379,7 +379,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         TAILSCALE="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
@@ -404,7 +404,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         # Get CPU usage from top
         CPU_IDLE=$(top -l 1 -n 0 | grep "CPU usage" | awk '{print $7}' | tr -d '%')
@@ -420,7 +420,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         # Get location coordinates via macOS CoreLocation (fallback to SF)
         LAT="37.7749"
@@ -475,7 +475,7 @@
       text = ''
         #!/usr/bin/env bash
 
-        SKETCHYBAR="${pkgs.sketchybar}/bin/sketchybar"
+        SKETCHYBAR="/opt/homebrew/bin/sketchybar"
 
         # Source icon map
         source "$HOME/.config/sketchybar/icon_map.sh"
@@ -501,7 +501,7 @@
     launchd.agents.sketchybar = {
       enable = true;
       config = {
-        ProgramArguments = [ "${pkgs.sketchybar}/bin/sketchybar" ];
+        ProgramArguments = [ "/opt/homebrew/bin/sketchybar" ];
         RunAtLoad = true;
         KeepAlive = true;
         ProcessType = "Interactive";

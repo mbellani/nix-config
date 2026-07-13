@@ -66,7 +66,9 @@ in
       # Brewfile; forcing it skips Homebrew's new confirmation prompt.
       extraFlags = [ "--force-cleanup" ];
     };
-    brews = map (t: t.brew) cliTools;
+    taps = [ "felixkratz/formulae" ];
+    # sketchybar via Homebrew: nixpkgs-unstable build crashes cctools ld.
+    brews = [ "felixkratz/formulae/sketchybar" ] ++ map (t: t.brew) cliTools;
     casks = [
       "nikitabobko/tap/aerospace"
       "agentsview"
@@ -76,6 +78,7 @@ in
       "intellij-idea-ce"
       "ollama-app"
       "session-manager-plugin"
+      "zed"
     ];
   };
 

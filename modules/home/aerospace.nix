@@ -23,7 +23,7 @@
       on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
       # Notify SketchyBar on workspace change
-      exec-on-workspace-change = ['/bin/bash', '-c', '${pkgs.sketchybar}/bin/sketchybar --trigger aerospace_workspace_change']
+      exec-on-workspace-change = ['/bin/bash', '-c', '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change']
 
       # Notify JankyBorders on window focus change
       after-startup-command = ['exec-and-forget ${pkgs.jankyborders}/bin/borders']

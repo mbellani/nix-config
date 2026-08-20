@@ -174,7 +174,7 @@ def fetch_transcript_private(doc_id):
 
 **This skill stops at fetching.** What happens next is the caller's job:
 
-- If the project has a `CLAUDE.md` with conventions for transcripts or notes, follow those.
+- If the project has an `AGENTS.md` or `CLAUDE.md` with conventions for transcripts or notes, follow those.
 - If not, ask the user what they want — save as-is, summarize, extract action items, write structured notes, etc.
 - Don't assume a particular output format.
 

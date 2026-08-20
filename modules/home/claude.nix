@@ -1,15 +1,28 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
-  # Claude Code user-global skills
-  # Source files live in ./claude/skills/<skill-name>/ and are symlinked into
-  # ~/.claude/skills/ by home-manager. Skills are declarative: edit the source
-  # here and re-run darwin-rebuild (or home-manager switch) to update.
-  home.file.".claude/skills/fetch-granola-notes/SKILL.md".source =
-    ./claude/skills/fetch-granola-notes/SKILL.md;
+  programs.claude-code = {
+    enable = true;
+    package = if pkgs.stdenv.isDarwin then null else pkgs.claude-code;
+
+    context = ./agents/global-instructions.md;
+
+    settings = {
+      permissions.allow = [
+        "Bash(find *)"
+        "Bash(grep *)"
+        "Bash(rg *)"
+      ];
+      model = "opus[1m]";
+      effortLevel = "high";
+      tui = "fullscreen";
+      skipWorkflowUsageWarning = true;
+      skipAutoPermissionPrompt = true;
+    };
+
+    skills = {
+      grill-me = ./agents/skills/grill-me;
+      fetch-granola-notes = ./claude/skills/fetch-granola-notes;
+    };
+  };
 }

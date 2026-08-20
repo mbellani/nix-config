@@ -50,6 +50,7 @@ let
         type = "registry";
         favorite_models = [ "opus" ];
       };
+      codex-acp.type = "registry";
     };
     lsp = {
       kotlin-lsp = {

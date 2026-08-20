@@ -4,6 +4,8 @@ let
   cliTools = import ../../modules/shared/cli-tools.nix { inherit pkgs; };
 in
 {
+  imports = [ ../../modules/shared/codex.nix ];
+
   # Networking
   networking.hostName = "xbow-laptop";
   networking.computerName = "xbow-laptop";

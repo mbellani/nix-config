@@ -28,6 +28,7 @@
     ./modules/home/typst.nix
     ./modules/home/fuzz.nix
     ./modules/home/raycast.nix
+    ./modules/home/codex.nix
     ./modules/home/claude.nix
     ./modules/home/packages.nix
   ];

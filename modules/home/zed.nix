@@ -15,6 +15,7 @@ let
     "git-firefly"
     "html"
     "nix"
+    "nvim-nightfox"
     "tokyo-night"
     "catppuccin-icons"
     "toml"
@@ -96,7 +97,7 @@ let
     colorize_brackets = true;
     theme = {
       mode = "dark";
-      dark = "Claude Code Inspired Dark";
+      dark = "Terafox - opaque";
       light = "Catppuccin Latte";
     };
     language_models = {

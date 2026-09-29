@@ -19,6 +19,10 @@
     brew = "btop";
   }
   {
+    nix = pkgs.gcx;
+    brew = "gcx";
+  }
+  {
     nix = pkgs.jq;
     brew = "jq";
   }

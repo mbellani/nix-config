@@ -30,6 +30,7 @@ let
     "claude-code-inspired-dark"
     "direnv"
     "kubernetes-helm"
+    "tsgo"
   ];
 
   # Shared Zed settings, fed to programs.zed-editor.userSettings on Linux and
